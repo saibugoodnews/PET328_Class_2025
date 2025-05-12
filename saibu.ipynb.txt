@@ -1,0 +1,290 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "id": "c3e87412",
+   "metadata": {},
+   "source": [
+    "## A script to classify and count 'active' and 'inactive' gridblocks in a discretized reservoir"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 31,
+   "id": "a53afb20",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "What is the length of the reservoir in x-direction? 100\n",
+      "What is the length of the reservoir in y-direction? 100\n",
+      "What is the length of the reservoir in z-direction? 100\n",
+      "How many blocks there are in x-axis? 2\n",
+      "How many blocks there are in y-axis? 2\n",
+      "How many layers are there in z-axis? 2\n"
+     ]
+    }
+   ],
+   "source": [
+    "#################### Task 1 ############################\n",
+    "    # Request for reservoir dimensions and discretization parameters\n",
+    "Lx = float(input('What is the length of the reservoir in x-direction?'))\n",
+    "Ly = float(input('What is the length of the reservoir in y-direction?'))\n",
+    "Lz = float(input('What is the length of the reservoir in z-direction?'))\n",
+    "nx = int(input('How many blocks there are in x-axis?'))\n",
+    "ny = int(input('How many blocks there are in y-axis?'))\n",
+    "nz = int(input('How many layers are there in z-axis?'))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 32,
+   "id": "559de93e",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "What is our cutoff value for permeability? 5\n"
+     ]
+    }
+   ],
+   "source": [
+    "#################### Task 2 ############################\n",
+    "    # Request for the cut-off value\n",
+    "cut_off = float(input('What is our cutoff value for permeability?'))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 33,
+   "id": "81bee451",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "#################### Task 3 ############################\n",
+    "    # Initialize counters\n",
+    "Active_layer = 0\n",
+    "Inactive_layer = 0\n",
+    "\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 34,
+   "id": "dd77006a",
+   "metadata": {
+    "scrolled": true
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "This is block 1\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "What is the permeability of this block? 4\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "This is block 2\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "What is the permeability of this block? 3\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "This is block 3\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "What is the permeability of this block? 6\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "This is block 4\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "What is the permeability of this block? 7\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "There were 2 active gridblocks in layer 1, 2 inactive gridblocks\n",
+      "There have been 1 layers\n",
+      "This is block 5\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "What is the permeability of this block? 4\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "This is block 6\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "What is the permeability of this block? 3\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "This is block 7\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "What is the permeability of this block? 5\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "This is block 8\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "What is the permeability of this block? 6\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "There were 1 active gridblocks in layer 2, 3 inactive gridblocks\n",
+      "There have been 2 layers\n"
+     ]
+    }
+   ],
+   "source": [
+    "### Task 4 ############################\n",
+    "    # Loop through all blocks (nested loop)\n",
+    "for k in range(1, nz+1):\n",
+    "    # Initialize layer counter\n",
+    "    k = 0 + k\n",
+    "    b = 0\n",
+    "    d = 0\n",
+    "    # two nested loops go here\n",
+    "    for j in range(1,ny+1):\n",
+    "        for i in range(1,nx+1):\n",
+    "            block = i + (j -1)*nx +(k-1)*nx*ny\n",
+    "            print(f'This is block {block}')\n",
+    "            cperm= float(input('What is the permeability of this block?'))\n",
+    "            if cperm > cut_off:\n",
+    "                Active_layer = Active_layer + 1\n",
+    "                b = b+1\n",
+    "            if cperm <= cut_off:\n",
+    "                d = d+1\n",
+    "                Inactive_layer = Inactive_layer + 1\n",
+    "    # Print layer count\n",
+    "    print(f'There were {b} active gridblocks in layer {k}, {d} inactive gridblocks')\n",
+    "    print(f'There have been {k} layers')"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 42,
+   "id": "ec00ce2a",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "There are 3 active gridblocks\n",
+      "There are 5 inactive gridblocks\n",
+      "Out of 8 gridblocks\n",
+      "37.5% of the gridblocks are active in the entire reservoir\n"
+     ]
+    }
+   ],
+   "source": [
+    "#################### Task 5 ############################\n",
+    "    # Print overall counts\n",
+    "\n",
+    "# Print 'active'\n",
+    "print(f'There are {Active_layer} active gridblocks')\n",
+    "\n",
+    "# Print 'inactive'\n",
+    "print(f'There are {Inactive_layer} inactive gridblocks')\n",
+    "print(f'Out of {Active_layer+Inactive_layer} gridblocks')\n",
+    "percent = (Active_layer / (Active_layer + Inactive_layer)) * 100\n",
+    "print(f'{percent}% of the gridblocks are active in the entire reservoir')\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "2d4ef753-bef2-4b01-a935-3fd88681a4d6",
+   "metadata": {},
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python [conda env:base] *",
+   "language": "python",
+   "name": "conda-base-py"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.12.7"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 5
+}
